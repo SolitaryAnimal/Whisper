@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="bower_components/crypto-js/crypto-js.js"></script>
+    <style>
+      body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+      }
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        max-width: 100px;
+        gap: 10px;
+      }
+
+      .buttons button {
+        font-size: 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="buttons">
+      <button type="button" onclick="encrypted()">加密</button>
+      <button type="button" onclick="decrypted()">解密</button>
+    </div>
+    <script>
+      function encrypted(text = null, key = null) {
+        text = text ?? prompt("输入明文");
+        if (text === null) return;
+        key = key ?? prompt("输入密钥");
+        if (key === null) return;
+        const encryptedText = CryptoJS.AES.encrypt(text, key).toString();
+        alert(`${window.location.origin}?t=${encryptedText}`);
+      }
+
+      function decrypted(encryptedText = null, key = null) {
+        encryptedText = encryptedText ?? prompt("输入密文");
+        if (encryptedText === null) return;
+        key = key ?? prompt("输入密钥");
+        if (key === null) return;
+        const decryptedText = CryptoJS.AES.decrypt(encryptedText, key).toString(
+          CryptoJS.enc.Utf8
+        );
+        alert(decryptedText);
+      }
+
+      const queryParams = new URLSearchParams(window.location.search);
+      if (queryParams.has("t")) {
+        decrypted(queryParams.get("t"));
+      }
+    </script>
+  </body>
+</html>
