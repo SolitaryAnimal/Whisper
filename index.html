@@ -59,7 +59,7 @@
 
       const queryParams = new URLSearchParams(window.location.search);
       if (queryParams.has("t")) {
-        decrypted(queryParams.get("t"));
+        decrypted(queryParams.get("t").replace(/ /g, "+"));
       }
     </script>
   </body>
