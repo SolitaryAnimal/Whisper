@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Whisper</title>
     <script src="bower_components/crypto-js/crypto-js.js"></script>
     <style>
       body {
@@ -39,7 +39,11 @@
         key = key ?? prompt("输入密钥");
         if (key === null) return;
         const encryptedText = CryptoJS.AES.encrypt(text, key).toString();
-        alert(`${window.location.origin}?t=${encryptedText}`);
+        alert(
+          `${
+            window.location.origin + window.location.pathname
+          }?t=${encryptedText}`
+        );
       }
 
       function decrypted(encryptedText = null, key = null) {
