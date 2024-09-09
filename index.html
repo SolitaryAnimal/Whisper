@@ -5,21 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Whisper</title>
     <script src="bower_components/crypto-js/crypto-js.js"></script>
+    <script src="bower_components/clipboard/dist/clipboard.min.js"></script>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="background">
-      <div>
+      <div id="panel-scoop" open-panel="describe">
         <header>
           <h1 class="title">WHISPER</h1>
         </header>
         <main>
-          <p>加密你的数据并轻松传输</p>
-          <p>加密与解密仅仅在您的浏览器中完成</p>
-          <div class="buttons">
-            <button type="button" onclick="encrypted()">加密</button>
-            <button type="button" onclick="decrypted()">解密</button>
+          <div id="describe" class="panel open">
+            <p>加密你的数据并轻松传输</p>
+            <p>加密与解密仅仅在您的浏览器中完成</p>
+            <div class="buttons">
+              <button type="button" onclick="openEncryptPanel()">加密</button>
+              <button type="button" onclick="openDecryptedPanel()">解密</button>
+            </div>
+          </div>
+          <form id="encrypt" class="panel">
+            <label>明文</label>
+            <textarea name="orgin" required></textarea>
+            <div class="labels">
+              <label
+                >密码:<input
+                  type="password"
+                  name="password"
+                  style="margin-left: 1em"
+                  required
+              /></label>
+              <label
+                >提示: <input type="text" name="tip" style="margin-left: 1em"
+              /></label>
+            </div>
+            <div class="buttons">
+              <button type="submit">加密信息</button>
+              <button type="reset">清空</button>
+              <button type="reset" onclick="returnHome()">返回</button>
+            </div>
+          </form>
+          <div id="encrypted-result" class="panel">
+            <h2>复制并分享你的密文或链接</h2>
+            <div class="buttons">
+              <button class="copy-btn" id="copy-encrypted-text">
+                拷贝密文
+              </button>
+              <button class="copy-btn" id="copy-encrypted-url">拷贝链接</button>
+              <button onclick="returnHome()">返回</button>
+            </div>
+          </div>
+          <form id="decrypted" class="panel">
+            <textarea name="ciphertext"></textarea>
+            <div class="labels">
+              <label
+                >密码:<input
+                  type="password"
+                  name="password"
+                  style="margin-left: 1em"
+                  required
+              /></label>
+            </div>
+            <div class="buttons">
+              <button type="submit">继续</button>
+              <button type="reset">清空</button>
+              <button type="reset" onclick="returnHome()">返回</button>
+            </div>
+          </form>
+          <div id="decrypted-result" class="panel">
+            <div></div>
+            <!-- <iframe sandbox="allow-scripts"></iframe> -->
+            <button onclick="returnHome()">返回</button>
           </div>
         </main>
       </div>

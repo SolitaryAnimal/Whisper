@@ -1,32 +1,4 @@
-* {
-    --background-color: rgb(12, 18, 34);
-    --font-color: rgb(223, 223, 223);
-    --hover-color: rgb(223, 223, 223);
-    --activate-color: rgb(225, 225, 225);
-}
-
-h1,
-p {
-    margin: 0;
-}
-
-button {
-    color: var(--font-color);
-    background-color: rgba(0, 0, 0, 0);
-    border: 1px solid white;
-    border-radius: 20px;
-    padding: 5px 30px;
-}
-
-button:hover {
-    transition: 0.2s;
-    background-color: white;
-    color: var(--background-color);
-}
-
-button:active {
-    background-color: var(--activate-color);
-}
+@import "./base.css";
 
 body {
     margin: 0;
@@ -36,9 +8,10 @@ body {
     color: var(--font-color);
 }
 
+/* 背景 */
+
 .background {
     position: absolute;
-    /* z-index: -10; */
     height: 100%;
     width: 100%;
     background-image: url("./hero-dark@90.dba36cdf.jpg");
@@ -47,7 +20,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.background > div {
+#panel-scoop {
     background-image: url(./background.svg);
     width: 100%;
     height: 100%;
@@ -57,13 +30,152 @@ body {
     align-items: center;
 }
 
-.title {
-    font-size: 5rem;
-    text-align: center;
+/* 标题 */
+
+header {
+    transition: all 1s;
+    min-width: 0%;
+    background-color: rgba(var(--header-color), 0);
 }
+
+.title {
+    transition: 1s font-size;
+    font-size: 5rem;
+}
+
+#panel-scoop:not([open-panel="describe"]) .title {
+    font-size: 2rem;
+}
+
+/* 主要内容 */
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: flex 1s;
+    flex: 0;
+}
+
+#panel-scoop:not([open-panel="describe"]) main {
+    flex: 1;
+}
+
+/* 面板 */
+.panel {
+    transition: all 1s;
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+}
+
+/* 按钮组 */
 
 .buttons {
     margin-top: 10px;
     display: flex;
     justify-content: space-around;
+    width: 100%;
+    gap: 1em;
+}
+
+/* 输入组 */
+
+.labels {
+    display: flex;
+    gap: 1em;
+
+    label {
+        display: inline-flex;
+        flex: 1;
+
+        input {
+            flex: 1;
+        }
+    }
+}
+
+/* 介绍面板 */
+
+#panel-scoop[open-panel="describe"] #describe {
+    height: 5.5em;
+    opacity: 1;
+}
+
+/* 加密面板 */
+
+#encrypt {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    textarea {
+        width: 50vw;
+        flex: 1;
+        resize: none;
+    }
+}
+
+#panel-scoop[open-panel="encrypt"] #encrypt {
+    height: 50vh;
+    opacity: 1;
+}
+
+/* 加密结果 */
+
+#encrypted-result {
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#panel-scoop[open-panel="encrypted-result"] #encrypted-result {
+    height: 6em;
+    opacity: 1;
+}
+
+/* 解密面板 */
+
+#decrypted {
+    display: flex;
+    flex-direction: column;
+    max-height: 30vh;
+    gap: 10px;
+    textarea {
+        width: 50vw;
+        flex: 1;
+        resize: none;
+    }
+}
+
+#panel-scoop[open-panel="decrypted"] #decrypted {
+    height: 50vh;
+    opacity: 1;
+}
+
+/* 解密结果面板 */
+
+#decrypted-result {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    div {
+        flex: 1;
+        width: 100%;
+        border-radius: 10px;
+        border: 2px solid white;
+        padding: 3px;
+    }
+}
+
+#panel-scoop[open-panel="decrypted-result"] #decrypted-result {
+    height: 50vh;
+    opacity: 1;
 }

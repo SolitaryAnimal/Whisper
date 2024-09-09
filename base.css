@@ -1,0 +1,51 @@
+* {
+    --background-color: rgb(12, 18, 34);
+    --header-color: 15, 20, 50;
+    --font-color: rgb(223, 223, 223);
+    --hover-color: rgb(223, 223, 223);
+    --activate-color: rgb(225, 225, 225);
+}
+
+h1,
+h2,
+p {
+    margin: 0;
+}
+
+button {
+    color: var(--font-color);
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 5px 30px;
+}
+
+button:hover {
+    transition: 0.2s;
+    background-color: white;
+    color: var(--background-color);
+}
+
+button:active {
+    background-color: var(--activate-color);
+}
+
+textarea {
+    background-color: var(--background-color);
+    color: var(--font-color);
+    border: 1px solid var(--font-color);
+    border-radius: 10px;
+}
+
+textarea:disabled {
+    border: 1px solid rgb(122, 122, 122);
+}
+
+input[type="text"],
+input[type="password"] {
+    background-color: var(--background-color);
+    color: var(--font-color);
+    border: 1px solid var(--font-color);
+    border-radius: 5px;
+    height: 1.5em;
+}
