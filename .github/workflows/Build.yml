@@ -1,0 +1,34 @@
+name: Build
+run-name: ${{ github.actor }} build page 🚀
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  Explore-GitHub-Actions:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.3
+      - name: Check out repository source code
+        uses: actions/checkout@v4
+        with:
+          path: 'source'
+      - name: Check out repository page
+        uses: actions/checkout@v4
+        with:
+          path: 'page'
+          ref: 'web'
+      - run: npm install -g rollup
+      - run: cd ${{ github.workspace }}/source && npm install
+      - run: cd ${{ github.workspace }}/source && make
+      - name: Remove old page
+        run: rm -rf ${{ github.workspace }}/page/*
+      - run: cp -R ${{ github.workspace }}/source/dist/* ${{ github.workspace }}/page
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          repository: ${{ github.workspace }}/page
+          branch: web
