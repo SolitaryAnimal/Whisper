@@ -10,5 +10,10 @@
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-serve": "^1.1.1",
     "rollup-plugin-terser": "^7.0.2"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c rollup.config.dev.mjs",
+    "clear": "rm -rf ./dist ./node_modules"
   }
 }
