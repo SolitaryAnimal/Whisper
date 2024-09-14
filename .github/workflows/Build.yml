@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 jobs:
   Explore-GitHub-Actions:
@@ -23,8 +24,7 @@ jobs:
           path: 'page'
           ref: 'web'
       - run: npm install -g rollup
-      - run: cd ${{ github.workspace }}/source && npm install
-      - run: cd ${{ github.workspace }}/source && make
+      - run: cd ${{ github.workspace }}/source && npm install && npm run build
       - name: Remove old page
         run: rm -rf ${{ github.workspace }}/page/*
       - run: cp -R ${{ github.workspace }}/source/dist/* ${{ github.workspace }}/page
